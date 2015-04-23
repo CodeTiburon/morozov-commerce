@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - l5projectDB@localhost" uuid="87441cf9-df68-4a84-a6d5-458e3dc33d68">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>l5projectDB.*</schema-pattern>
+      <default-schemas>l5projectDB.*</default-schemas>
+    </data-source>
+  </component>
+</project>
