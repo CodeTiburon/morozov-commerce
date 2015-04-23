@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Registrar;
+
 class HomeController extends Controller {
 
 	/*
@@ -18,7 +20,7 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Registrar $registrar)
 	{
 		$this->middleware('auth');
 	}

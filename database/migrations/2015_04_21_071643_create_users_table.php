@@ -18,9 +18,17 @@ class CreateUsersTable extends Migration {
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->tinyInteger('user_role_id');
             $table->string('remember_token',100)->nullable();
             $table->timestamps();
 		});
+
+        Schema::create('user_roles', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('role_name');
+            $table->timestamps();
+        });
 	}
 
 	/**
