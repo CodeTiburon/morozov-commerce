@@ -4152,6 +4152,50 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-form {
   border-color: #e7e7e7;
 }
+.admin{
+    background: #FBE1E0;
+    color: #fff;
+}
+.admin a{
+    color: #fff;
+}
+.edit-category li{
+    padding: 5px;
+}
+.edit-category li span{
+    padding: 2px;
+    cursor: pointer;
+}
+.edit-category li span:hover{
+    color: #07a;
+}
+.create-choice{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;
+    z-index: 10;
+}
+.create-choice li{
+    cursor: pointer;
+    list-style: outside none none;
+    margin-left: -40px;
+}
+.edit-category .active{
+    color: #ED5565;
+}
+.edit-category li{
+    width: auto;
+}
+.edit-category .remove-category{
+    cursor: pointer;
+    padding-left: 5px;
+    color: #FFC6C4;
+}
+.edit-category .remove-category:hover{
+    color: #ED5565;
+}
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,7 +22,11 @@ class AUserController extends Controller {
 	 */
 	public function index()
 	{
-        return view('admin/home', ['name' => 'James']);
+        if(\MyAuth::isAdmin()) {
+            return view('admin/home');
+        } else {
+            return "No-no-no, you are not an Admin";
+        }
 	}
 
 	/**

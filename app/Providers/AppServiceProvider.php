@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -29,6 +30,17 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+
+        $this->app->Singleton('renderview', function()
+        {
+            return new App\Services\RenderView;
+        });
+
+        $this->app->Singleton('myhelpers', function()
+        {
+            return new App\Services\MyHelpers;
+        });
+
 	}
 
 }

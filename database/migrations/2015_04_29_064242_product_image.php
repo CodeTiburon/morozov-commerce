@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserRoles extends Migration {
+class ProductImage extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class UserRoles extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('user_roles', function(Blueprint $table)
+        Schema::create('product_image', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('role_name');
+            $table->integer('product_id');
+            $table->string('image');
         });
 	}
 
@@ -26,7 +27,7 @@ class UserRoles extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('user_roles');
+        Schema::drop('product_image');
 	}
 
 }

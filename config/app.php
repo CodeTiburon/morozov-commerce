@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -144,8 +145,10 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-        'Frozennode\Administrator\AdministratorServiceProvider',
-
+		'App\Providers\CustomAuthProvider',
+       // 'Frozennode\Administrator\AdministratorServiceProvider',
+        'Baum\Providers\BaumServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
 	],
 
 	/*
@@ -193,7 +196,11 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-
+		'MyAuth'    => 'App\Facade\MyAuth',
+		'MyHelpers'    => 'App\Facade\MyHelpers',
+		'RenderView'    => 'App\Facade\RenderView',
+		'Form'      => 'Illuminate\Html\FormFacade',
+        'Image'     => 'Intervention\Image\Facades\Image',
 	],
 
 ];

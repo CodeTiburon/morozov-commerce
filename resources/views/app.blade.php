@@ -25,7 +25,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/jquery/auth.js') }}"></script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default {{ Request::is('admin') || Request::is('admin/*') ? 'admin' : '' }}">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -34,15 +34,28 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="{{ url('/') }}">Lcommerce</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
+                    @if( Request::is('home') || Request::is('home/*') )
+                        <li><a href="{{ url('/categories') }}">Categories</a></li>
+                    @else
+					    <li><a href="{{ url('/admin/categories') }}">Categories</a></li>
+                    @endif
+                    @if( Request::is('home') || Request::is('home/*') )
+                        <li><a href="{{ url('/products') }}">Products</a></li>
+                    @else
+                        <li><a href="{{ url('/admin/products') }}">Products</a></li>
+                    @endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+                    @if( MyAuth::isAdmin() && (Request::is('home') || Request::is('home/*')) )
+                        <li><a class="admin-link" href="{{url('admin')}}">Admin Panel</a></li>
+                    @endif
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
 						<li><a href="{{ url('/auth/register') }}">Register</a></li>
