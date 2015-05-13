@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ProductToCategory extends Migration {
+class AddPrice extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,9 @@ class ProductToCategory extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('product_to_category', function(Blueprint $table)
+        Schema::table('product', function(Blueprint $table)
         {
-            $table->integer('product_id');
-            $table->integer('category_id');
+            $table->decimal('price', 5, 2)->after('model');
         });
 	}
 
@@ -26,7 +25,9 @@ class ProductToCategory extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('product_to_category');
+        Schema::table('product', function(Blueprint $table) {
+            $table->dropColumn('price');
+        });
 	}
 
 }

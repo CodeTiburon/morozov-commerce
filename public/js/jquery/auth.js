@@ -27,11 +27,11 @@ function processJson(data) {
     if(data.success){
         window.location = data.redirect_url;
     } else {
-        addErrorMessages();
+        addErrorMessages(data);
     }
 }
 
-function addErrorMessages(){
+function addErrorMessages(data){
     var errorMessages = [];
     for(var msg in data.errors){
         errorMessages.push('<li>' + data.errors[msg] + '</li>');

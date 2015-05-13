@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductToCategory;
 use Input;
 use Validator;
 use Redirect;
@@ -19,6 +20,7 @@ class ProductController extends Controller {
     public function __construct(Registrar $registrar)
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
 
 	/**
@@ -28,51 +30,28 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-        $categories =  Category::getNestedList('name', null , $seperator = '&#8212;');
-        if(\MyAuth::isAdmin()) {
-            return view('admin/products/add_product', ['categories' => $categories]);
-        } else {
-            return "No-no-no, you are not an Admin";
+        //$categories =  Category::getNestedList('name', null , $seperator = '&#8212;');
+        $productsAll =  Product::all();
+
+        foreach ($productsAll as $product) {
+            $image = $product->images()->where('id', '=', $product->primary_image_id)->first();
+            $products[] = array(
+                'id' => $product->id,
+                'name' => $product->name,
+                'quantity' => $product->quantity,
+                'price' => $product->price,
+                'model' => $product->model,
+                'image' => isset($image->image) ? $image->image : 'no_image.png',
+                'description' => $product->description,
+                'created_at' => \Carbon::parse($product->created_at)->toFormattedDateString(),
+            );
         }
+
+        return view('admin/products/products', ['products' => isset($products) ? $products : null]);
+
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create(Request $request)
-	{
-        // getting all of the post data
-        $files = Input::file('images');
-        // Making counting of uploaded images
-        $file_count = count($files);
-        // start count how many uploaded
-        $data = \MyHelpers::imagesUpload($files);
-        $uploadcount = $data['count'];
-        $validator = $data['validator'];
-        if(true){
-            $productId = Product::create([
-                'name' => $request['name'],
-                'model' => $request['model'],
-                'description' => $request['description'],
-                'quantity' => $request['quantity']
-            ]);
 
-            ProductImage::create([
-                'product_id' => $productId->id,
-                'image' => '/ololo/nanana'
-            ]);
-            dd($productId->id);
-        }
-        if($uploadcount == $file_count){
-            Session::flash('success', 'Upload successfully');
-            return Redirect::to('/admin/products/add');
-        }
-        else {
-            return Redirect::to('/admin/products/add')->withInput()->withErrors($validator);
-        }
-	}
 
 	/**
 	 * Store a newly created resource in storage.

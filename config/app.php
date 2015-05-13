@@ -198,9 +198,10 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'MyAuth'    => 'App\Facade\MyAuth',
 		'MyHelpers'    => 'App\Facade\MyHelpers',
-		'RenderView'    => 'App\Facade\RenderView',
+		'RenderView'   => 'App\Facade\RenderView',
 		'Form'      => 'Illuminate\Html\FormFacade',
         'Image'     => 'Intervention\Image\Facades\Image',
+        'Carbon'    => 'Carbon\Carbon',
 	],
 
 ];

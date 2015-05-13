@@ -15,6 +15,7 @@ class CategoryController extends Controller {
     public function __construct(Registrar $registrar)
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -24,13 +25,11 @@ class CategoryController extends Controller {
      */
     public function index()
     {
+
         $categories =  Category::all()->toHierarchy();
 
-        if(\MyAuth::isAdmin()) {
-            return view('admin/categories/categories', ['categories' => $categories]);
-        } else {
-            return "No-no-no, you are not an Admin";
-        }
+        return view('admin/categories/categories', ['categories' => $categories]);
+
     }
 
     /**

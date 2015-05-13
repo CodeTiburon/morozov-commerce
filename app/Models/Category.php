@@ -22,4 +22,9 @@ class Category extends Node {
     // guard attributes from mass-assignment
     protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
 
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_to_category');
+    }
+
 }

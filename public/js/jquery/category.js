@@ -28,8 +28,8 @@ $(document).ready(function() {
     });
 
     // submenu create choice handler
-    $(document).on('click', '.create-choice option', function(){
-        selectedType = $(this).val();
+    $(document).on('click', '.create-choice select', function(){
+        selectedType = $(this).val();;
         visualChange();
     });
 
@@ -151,6 +151,7 @@ $(document).ready(function() {
         }
         $node.append('<div class="alert alert-danger">' + msgHtml + '<br><br><ul>' + errorMessages + '</ul></div>');
     }
+
 
 
 

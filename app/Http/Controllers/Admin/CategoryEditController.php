@@ -16,6 +16,7 @@ class CategoryEditController extends Controller {
     public function __construct(Registrar $registrar)
     {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -26,12 +27,7 @@ class CategoryEditController extends Controller {
     public function index()
     {
         $categories =  Category::all()->toHierarchy();
-
-        if(\MyAuth::isAdmin()) {
-            return view('admin/categories/edit_all', ['categories' => $categories]);
-        } else {
-            return "No-no-no, you are not an Admin";
-        }
+        return view('admin/categories/edit_all', ['categories' => $categories]);
     }
 
     /**
@@ -43,7 +39,7 @@ class CategoryEditController extends Controller {
     {
         $validator = \MyAuth::checkCategoryField($request->only('name')['name']);
 
-        if(!$validator->fails()){
+        if($validator->passes()){
             if($request['selected_type'] === 'root'){
                 // add the new root category
                 $node = Category::create(['name' => $request->only('name')['name']]);

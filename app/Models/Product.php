@@ -17,11 +17,16 @@ class Product extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'quantity', 'model'];
+    protected $fillable = ['name', 'description', 'quantity', 'model', 'price', 'primary_image_id'];
 
-//    public function image()
-//    {
-//        return $this->hasMany('App\Comment');
-//    }
+    public function images()
+    {
+        return $this->hasMany('App\Models\ProductImage');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category', 'product_to_category');
+    }
 
 }

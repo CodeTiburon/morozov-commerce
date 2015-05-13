@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Registrar;
+use App\Models\Category;
 
 class HomeController extends Controller {
 
@@ -22,7 +23,7 @@ class HomeController extends Controller {
 	 */
 	public function __construct(Registrar $registrar)
 	{
-		$this->middleware('auth');
+		//$this->middleware('auth');
 	}
 
 	/**
@@ -32,7 +33,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+        $categories =  Category::all()->toHierarchy();
+        return view('home', ['categories' => isset($categories) ? $categories : null]);
 	}
 
 }

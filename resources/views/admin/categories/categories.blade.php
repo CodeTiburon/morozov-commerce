@@ -8,14 +8,18 @@
 				<div class="panel-heading">Categories</div>
 
 				<div class="panel-body">
-                    <ul>
-                        @foreach ($categories as $category)
-                            {!! RenderView::renderNode($category) !!}
-                        @endforeach
-                    </ul>
-                    @if( MyAuth::isAdmin() )
-                        <a class="edit-category" href="{{Url('admin/categories/edit')}}">Редактировать категории</a>
+                    @if( $categories )
+                        <ul>
+                            @foreach ($categories as $category)
+                                {!! RenderView::renderNode($category) !!}
+                            @endforeach
+                        </ul>
+                    @else
+                        <span> There are no categories </span>
                     @endif
+                        @if( MyAuth::isAdmin() )
+                            <a class="edit-category" href="{{Url('admin/categories/edit')}}">Редактировать категории</a>
+                        @endif
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,8 @@ use Validator;
 
 class MyAuth {
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         if(\Auth::check() && \Auth::user()->user_role_id === '3') {
             return true;
         } else {
@@ -14,14 +15,31 @@ class MyAuth {
         }
     }
 
-    public function checkCategoryField($field){
+    public function checkCategoryField($field)
+    {
         $messages = [
             'required' => 'The category name field is required.',
         ];
+        $rules = ['name' => ['required', 'min:5', 'unique:categories', 'string']];
         $validator = Validator::make(
             ['name' => $field],
-            ['name' => ['required', 'min:5', 'unique:categories', 'string']],
+            $rules,
             $messages
+        );
+        return $validator;
+    }
+
+    public function checkProductField($fields)
+    {
+        $rules = array(
+            'file' => 'mimes:png,gif,jpeg',
+            'name' => 'required|min:5'
+        ); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+        $validator = Validator::make(
+            array(
+                'file'=> $fields['file'],
+                'name'=> $fields['name']
+            ), $rules
         );
         return $validator;
     }
