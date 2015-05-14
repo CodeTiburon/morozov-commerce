@@ -15,7 +15,7 @@ class CategoryController extends Controller {
      */
     public function __construct(Registrar $registrar)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -46,11 +46,8 @@ class CategoryController extends Controller {
             );
         }
 
-        if(\MyAuth::isAdmin()) {
-            return view('category', ['categories' => $categories, 'products' => $products]);
-        } else {
-            return "No-no-no, you are not an Admin";
-        }
+        return view('category', ['categories' => $categories, 'products' => $products]);
+
     }
 
     /**
@@ -77,6 +74,7 @@ class CategoryController extends Controller {
                     'name' => $product->name,
                     'quantity' => $product->quantity,
                     'model' => $product->model,
+                    'price' => $product->price,
                     'image' => isset($image->image) ? asset('uploads/'.$image->image ) : asset('uploads/no_image.png'),
                     'description' => $product->description,
                     'short_descr' => $product->description ? substr($product->description, 0, 25).' ...' : ' ',

@@ -4240,6 +4240,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     cursor: pointer;
     margin: 3px;
     border-radius: 5px;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 13px;
 }
 #menu li ul{
     list-style: none;
@@ -4301,7 +4303,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .product:hover{
-    border-color: #999;
+    border-color: #D0CFCF;
+    background: #FFF6F6;
 }
 .product .price, .price {
     font-size: 20px;
@@ -4310,16 +4313,34 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .minicart{
-    float:right;
-    height:55px;
+    float: right;
     padding: 10px;
     padding-left: 15px;
     margin: 10px;
-    border: 1px solid gray;
+    border: 1px solid #f0ad4e;
     border-radius: 10px;
+    color: #333;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    background: #E6DEEA;
+    background: #EAEAEA;
+}
+
+.float{
+    float: left;
+    margin: 5px;
+}
+
+.quantity-number{
+    width: 75px;
+}
+
+.quantity-number #quantity{
+    width: 70px;
+}
+
+.total{
+    background-color: #EAEAEA;
+    padding: 10px;
 }
 
 .gridly {

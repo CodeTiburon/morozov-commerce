@@ -19,7 +19,7 @@
                         @endif
                         @if( MyAuth::isAdmin() )
                             <br/>
-                            <a class="edit-category" href="{{Url('admin/categories/edit')}}">Редактировать категории</a>
+                            <a class="edit-category" href="{{Url('admin/categories/edit')}}">Edit categories</a>
                         @endif
                     </div>
                 </div>

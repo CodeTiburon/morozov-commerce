@@ -2,6 +2,9 @@
 
 use Validator;
 use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class MyHelpers {
 
@@ -34,7 +37,8 @@ class MyHelpers {
         return Array('count' => $uploadcount, 'path' => $path, 'images' => $imagesArr);
     }
 
-    public function categoriesSeed(){
+    public function categoriesSeed()
+    {
         $categories = [
             ['id' => 1, 'name' => 'TV & Home Theather'],
             ['id' => 2, 'name' => 'Tablets & E-Readers'],
@@ -57,6 +61,79 @@ class MyHelpers {
         ];
 
         Category::buildTree($categories); // => true
+    }
+
+    public function cartTotalItems()
+    {
+        $cart = Session::get('cart');
+        $num_items = 0;
+
+        if(is_array($cart))
+        {
+            foreach($cart as $id => $qty)
+            {
+                $num_items = $num_items + $qty;
+            }
+        }
+
+        return $num_items;
+    }
+
+    public function cartTotalSum()
+    {
+        $cart = Session::get('cart');
+
+        $total_price = 0;
+        $sales = 1;
+
+        if(is_array($cart))
+        {
+            $products = $this->cartProducts();
+
+            foreach($products as $product )
+            {
+                if($product)
+                {
+                    $item_price = $product['price'];
+                    $quantity = $cart[$product['id']];
+                    $total_price = ($total_price + $item_price * $quantity) * $sales;
+                }
+            }
+        }
+        return $total_price;
+    }
+
+    public function cartTotalProductSum(){
+        $cart = Session::get('cart');
+
+    }
+
+    public function cartProducts(){
+        $cart = Session::get('cart');
+        $productsInCart = Product::whereIn('id',  array_keys($cart))->get();
+        $products = array();
+        foreach ($productsInCart as $product) {
+            $products[] = $this->cartProductData($product);
+        }
+        return $products;
+    }
+
+    public function cartProductData($productObj){
+        $cart = Session::get('cart');
+
+        $image = $productObj->images()->where('id', '=', $productObj->primary_image_id)->first();
+        return array(
+            'id' => $productObj->id,
+            'name' => $productObj->name,
+            'quantity' => $cart[$productObj->id],
+            'price' => $productObj->price,
+            'price_total' => $productObj->price * $cart[$productObj->id],
+            'model' => $productObj->model,
+            'image' => isset($image->image) ? $image->image : 'no_image.png',
+            'description' => $productObj->description,
+            'created_at' => \Carbon::parse($productObj->created_at)->toFormattedDateString(),
+        );
+
     }
 
 }

@@ -1,5 +1,15 @@
 <div class="minicart">
-    <strong>Товаров в корзине:</strong>{{ $mini_cart['cart_count'] }} шт.
-    <br/><strong>На сумму:</strong>{{ $mini_cart['cart_price'] }} $.
-    <br/><a href=''>Оформить заказ</a>
+    @if($mini_cart['cart_count'] != 0)
+        <div class="minicart-count">
+            <strong>Total products: </strong><span class="badge">{{ $mini_cart['cart_count'] }}</span>
+        </div>
+        <div class="minicart-price">
+            <strong>Total sum: </strong><span>{{ $mini_cart['cart_price'] }}</span> $.
+        </div>
+        <div>
+            <a href="{{ url('checkout/cart/show') }}" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> Cart open</a>
+        </div>
+    @else
+        <p>The cart is empty </p>
+    @endif
 </div>

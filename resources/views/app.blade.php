@@ -29,6 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{ URL::asset('/assets/Gritter-master/js/jquery.gritter.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery/auth.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery/common.js') }}"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default {{ Request::is('admin') || Request::is('admin/*') ? 'admin' : '' }}">
@@ -63,7 +64,7 @@
                         <li><a class="admin-link" href="{{url('admin')}}">Admin Panel</a></li>
                     @endif
 					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
+						<li><a href="{{ url('/auth/login') }}"><span class="glyphicon glyphicon-log-in"> </span>&nbsp;Login</a></li>
 						<li><a href="{{ url('/auth/register') }}">Register</a></li>
 					@else
 						<li class="dropdown">
@@ -73,6 +74,7 @@
 							</ul>
 						</li>
 					@endif
+                        <li>@include('minicart')</li>
 				</ul>
 			</div>
 		</div>

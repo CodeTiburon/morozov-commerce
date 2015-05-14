@@ -7,6 +7,13 @@
                 <img style="max-width:200px" src="<%= image %>" alt="<%= name %>"/>
             </a>
         </p>
+        <br/>
         <p class="description"><%= description %> </p>
+        <br/>
+        <div class="price">
+            Price: <%= price %> $
+        </div>
+        <br/>
+        <a data-id="<%= id %>" href="#" class="btn btn-success add-to-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
     </div>
 </script>

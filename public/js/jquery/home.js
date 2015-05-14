@@ -54,6 +54,7 @@ $(document).ready(function() {
                             'name': product['name'],
                             'model': product['model'],
                             'image': product['image'],
+                            'price': product['price'],
                             'description': product['short_descr']
                         }));
                     });

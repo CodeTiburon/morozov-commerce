@@ -2,6 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 use App;
+use Illuminate\Support\Facades\View;
+use App\Services\MyHelpers;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -12,7 +14,11 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+        //view()->share('mini_cart', ['cart_count' => 1, 'cart_price' => 5]);
+        View::composer('app', function($view)
+        {
+            $view->with('mini_cart', ['cart_count' => \MyHelpers::cartTotalItems(), 'cart_price' => \MyHelpers::cartTotalSum()]);
+        });
 	}
 
 	/**
