@@ -38,6 +38,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                        <div class="pagination">{!! $plinks !!}</div>
                     @else
                         <span>There are no products</span>
                     @endif

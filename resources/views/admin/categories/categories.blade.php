@@ -14,11 +14,12 @@
                                 {!! RenderView::renderNode($category) !!}
                             @endforeach
                         </ul>
+                        <div class="pagination">{!! $plinks !!}</div>
                     @else
                         <span> There are no categories </span>
                     @endif
                         @if( MyAuth::isAdmin() )
-                            <a class="edit-category" href="{{Url('admin/categories/edit')}}">Редактировать категории</a>
+                            <a class="edit-category" href="{{Url('admin/categories/edit')}}">Edit</a>
                         @endif
 				</div>
 			</div>

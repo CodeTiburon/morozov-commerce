@@ -39,9 +39,12 @@ Route::get('/category/{id}', 'CategoryController@index');
 Route::get('products/show/{id}', 'ProductController@index');
 
 Route::get('checkout/cart/show', 'CartController@index');
+Route::get('checkout/cart', 'CartController@index');
+Route::get('checkout/checkout', 'CheckoutController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 	'checkout/cart' => 'CartController',
+	'checkout/checkout' => 'CheckoutController',
 ]);

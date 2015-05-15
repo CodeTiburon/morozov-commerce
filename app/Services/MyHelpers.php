@@ -131,7 +131,7 @@ class MyHelpers {
             'model' => $productObj->model,
             'image' => isset($image->image) ? $image->image : 'no_image.png',
             'description' => $productObj->description,
-            'created_at' => \Carbon::parse($productObj->created_at)->toFormattedDateString(),
+            'created_at' => $productObj->created_at,
         );
 
     }

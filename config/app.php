@@ -136,6 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+        'Netshell\Paypal\PaypalServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -149,6 +150,7 @@ return [
        // 'Frozennode\Administrator\AdministratorServiceProvider',
         'Baum\Providers\BaumServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Paypal' => 'Netshell\Paypal\Facades\Paypal',
 	],
 
 	/*

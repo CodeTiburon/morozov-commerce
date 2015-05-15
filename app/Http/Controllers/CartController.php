@@ -18,12 +18,15 @@ use Session;
 
 class CartController extends Controller {
 
+    protected $cart;
+
     /**
      * @param Registrar $registrar
      */
     public function __construct(Registrar $registrar)
     {
         //$this->middleware('auth');
+        $this->cart = Session::get('cart');
     }
 
 	/**
@@ -33,7 +36,6 @@ class CartController extends Controller {
 	 */
 	public function index(MyHelpers $cart)
 	{
-
         $products = $cart->cartProducts();
         return view('cart', ['cart' => $cart, 'products' => isset($products) ? $products : null]);
     }
@@ -80,6 +82,10 @@ class CartController extends Controller {
         {
             Session::forget('cart.'.$id);
         }
+
+        $json['success'] = true;
+
+        return response()->json($json);
     }
 
     function postClearProduct(Request $request)
@@ -92,7 +98,6 @@ class CartController extends Controller {
 
     function ClearProduct($id)
     {
-        $cart = Session::get('cart');
         Session::forget('cart.'.$id);
     }
 

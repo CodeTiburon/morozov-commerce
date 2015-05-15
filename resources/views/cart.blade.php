@@ -8,7 +8,7 @@
 				<div class="panel-heading">Cart</div>
                 <div class="panel-body">
                     @if ($products)
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="cart">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -24,8 +24,8 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td>{{ $product['id'] }}</td>
-                                    <td><a class="link-to-product" href="{{ url('admin/products/edit').'/'.$product['id'] }}"><img style="max-width:100px" src="{{ asset('uploads/'.$product['image'] ) }}" alt="{{ $product['name'] }}"/></a></td>
-                                    <td><a class="link-to-product" href="{{ url('admin/products/edit').'/'.$product['id'] }}">{{ $product['name'] }}</a></td>
+                                    <td><a class="link-to-product" href="{{ url('products/show').'/'.$product['id'] }}"><img style="max-width:100px" src="{{ asset('uploads/'.$product['image'] ) }}" alt="{{ $product['name'] }}"/></a></td>
+                                    <td><a class="link-to-product" href="{{ url('products/show').'/'.$product['id'] }}">{{ $product['name'] }}</a></td>
                                     <td>{{ $product['model'] }}</td>
                                     <td>{{ substr($product['description'], 0, 25) }} ...</td>
                                     <td>
@@ -47,10 +47,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                        <div class="total">
+                        <div class="cart-total">
                             <p>Total sum: <span class="price"> {{ MyHelpers::cartTotalSum() }} $</span></p>
                             <div class="add-new-block">
-                                <a class="add-new-product btn btn-default" href="{{ url('admin/products/add') }}">Checkout</a>
+                                <a class="add-new-product btn btn-default" href="{{ url('checkout/checkout') }}">Checkout</a>
                             </div>
                         </div>
                     @else
@@ -58,7 +58,9 @@
                     @endif
                 </div>
 			</div>
+            @if ($products)
             <a id="clear-cart" href="#">Clear cart</a>
+            @endif
 		</div>
 	</div>
 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Pagination\Paginator;
 
 
 class CategoryController extends Controller {
@@ -26,9 +27,10 @@ class CategoryController extends Controller {
     public function index()
     {
 
-        $categories =  Category::all()->toHierarchy();
+        $categoriesWithPagination = Category::paginate(25);
+        $categories =  $categoriesWithPagination->toHierarchy();
 
-        return view('admin/categories/categories', ['categories' => $categories]);
+        return view('admin/categories/categories', ['categories' => $categories, 'plinks' => $categoriesWithPagination->render()]);
 
     }
 

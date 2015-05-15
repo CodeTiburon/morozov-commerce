@@ -14,10 +14,10 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-        //view()->share('mini_cart', ['cart_count' => 1, 'cart_price' => 5]);
+    //  view()->share('mini_cart', ['cart_count' => \MyHelpers::cartTotalItems(), 'cart_price' => \MyHelpers::cartTotalSum()]);
         View::composer('app', function($view)
         {
-            $view->with('mini_cart', ['cart_count' => \MyHelpers::cartTotalItems(), 'cart_price' => \MyHelpers::cartTotalSum()]);
+           $view->with('mini_cart', ['cart_count' => \MyHelpers::cartTotalItems(), 'cart_price' => \MyHelpers::cartTotalSum()]);
         });
 	}
 

@@ -33,6 +33,7 @@
                     <div class="products">
                         <p class="empty"> Please choose a category. </p>
                     </div>
+                    <div id="pagination"></div>
                 </div>
             </div>
         </div>

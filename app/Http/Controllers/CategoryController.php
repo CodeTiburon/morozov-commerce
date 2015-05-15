@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
 
     /**
      * @param Registrar $registrar
@@ -25,7 +26,7 @@ class CategoryController extends Controller {
      */
     public function index($id)
     {
-        $categories =  Category::all()->toHierarchy();
+        $categories = Category::all()->toHierarchy();
         /** @var  $productsAll */
         $productsAll = Category::find($id)->products()->get();
 
@@ -63,10 +64,11 @@ class CategoryController extends Controller {
         $products = array();
 
         /** @var  $productsAll */
-        $productsAll = Category::find($request['id'])->products()->get();
+        $productsAll = Category::find($request['id'])->products();
+        $productsWithPagination = $productsAll->paginate(2);
 
-        if ($productsAll){
-            foreach ($productsAll as $product) {
+        if ($productsWithPagination) {
+            foreach ($productsWithPagination as $product) {
                 /** @var Product $product */
                 $image = $product->images()->where('id', '=', $product->primary_image_id)->first();
                 $products[] = array(
@@ -75,14 +77,15 @@ class CategoryController extends Controller {
                     'quantity' => $product->quantity,
                     'model' => $product->model,
                     'price' => $product->price,
-                    'image' => isset($image->image) ? asset('uploads/'.$image->image ) : asset('uploads/no_image.png'),
+                    'image' => isset($image->image) ? asset('uploads/' . $image->image) : asset('uploads/no_image.png'),
                     'description' => $product->description,
-                    'short_descr' => $product->description ? substr($product->description, 0, 25).' ...' : ' ',
+                    'short_descr' => $product->description ? substr($product->description, 0, 25) . ' ...' : ' ',
                     'created_at' => \Carbon::parse($product->created_at)->toFormattedDateString(),
                 );
             }
 
             $json['products'] = $products;
+            $json['plinks'] = $productsWithPagination->render();
         } else {
             $json['errors'] = 'error';
         }
@@ -113,7 +116,7 @@ class CategoryController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -124,7 +127,7 @@ class CategoryController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function editAll()
@@ -135,13 +138,13 @@ class CategoryController extends Controller {
 
     public function edit($id)
     {
-       //
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function update($id)
@@ -152,7 +155,7 @@ class CategoryController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

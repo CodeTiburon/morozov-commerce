@@ -4302,6 +4302,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     padding: 5px;
 }
 
+.products:after{
+    display: block;
+    clear: both;
+    content: '';
+}
+
 .product:hover{
     border-color: #D0CFCF;
     background: #FFF6F6;
@@ -4315,7 +4321,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .minicart{
     float: right;
     padding: 10px;
-    padding-left: 15px;
     margin: 10px;
     border: 1px solid #f0ad4e;
     border-radius: 10px;
@@ -4323,6 +4328,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     background: #EAEAEA;
+}
+
+.minicart .minicart-button{
+    text-align: center;
 }
 
 .float{
@@ -4338,7 +4347,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     width: 70px;
 }
 
-.total{
+.cart-total{
     background-color: #EAEAEA;
     padding: 10px;
 }

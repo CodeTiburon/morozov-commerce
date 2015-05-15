@@ -6,8 +6,8 @@
         <div class="minicart-price">
             <strong>Total sum: </strong><span>{{ $mini_cart['cart_price'] }}</span> $.
         </div>
-        <div>
-            <a href="{{ url('checkout/cart/show') }}" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> Cart open</a>
+        <div class="minicart-button">
+            <a href="{{ url('checkout/cart') }}" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> Cart open</a>
         </div>
     @else
         <p>The cart is empty </p>
